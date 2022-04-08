@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import logo from "../assets/images/logo.png"
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   height: 60px;
@@ -46,6 +47,7 @@ const Center = styled.div`
 `;
 
 const Logo = styled.img``;
+
 const Right = styled.div`
   flex: 1;
   display: flex;
@@ -61,7 +63,43 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 
+const AuthContainer = styled.div`
+    display: flex;
+`
+
+const ButtonLogin = styled.button`
+    border: 1px solid #ffa15f;
+    border-radius: 100px;
+    padding: 10px 35px;
+    background-color: #fff;
+    color: #ffa15f;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color .3s ease;
+    &:hover {
+        background-color: #ffa15f;
+        color: #fff;
+    }
+`
+const ButtonRegister = styled.button`
+    border: none;
+    padding: 10px 35px;
+    background-color: #fff;
+    color: #4d4d4d;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color .3s ease;
+    &:hover {
+        background-color: #4d4d4d;
+        border-radius: 100px;
+        color: #fff;
+    }
+`
+
 const Navbar = () => {
+    const quantity = useSelector(state=>state.cart.quantity)
+    const user = useSelector((state) => state.user.currentUser)
+
     return (
         <Container>
             <Wrapper>
@@ -72,16 +110,34 @@ const Navbar = () => {
                 </SearchContainer>
                 </Left>
                 <Center>
-                <Link to="/"><Logo src={logo}></Logo></Link>
+                    <Link to="/"><Logo src={logo}></Logo></Link>
                 </Center>
                 <Right>
-                <MenuItem>REGISTER</MenuItem>
-                <MenuItem>SIGN IN</MenuItem>
-                <MenuItem>
-                    <Badge badgeContent={4} color="secondary">
-                    <ShoppingCartOutlined />
-                    </Badge>
-                </MenuItem>
+                    { user ? user.username :  
+                        <AuthContainer>
+                            <MenuItem>
+                                <Link to="/register">
+                                    <ButtonRegister>
+                                        Register
+                                    </ButtonRegister>
+                                </Link>
+                            </MenuItem>
+                            <MenuItem>
+                                <Link to="/login">
+                                    <ButtonLogin>
+                                        Log in
+                                    </ButtonLogin>
+                                </Link>
+                            </MenuItem>
+                        </AuthContainer>
+                    }
+                    <Link to="/cart">
+                        <MenuItem>
+                            <Badge badgeContent={quantity} color="secondary">
+                            <ShoppingCartOutlined />
+                            </Badge>
+                        </MenuItem>
+                    </Link>
                 </Right>
             </Wrapper>
         </Container>

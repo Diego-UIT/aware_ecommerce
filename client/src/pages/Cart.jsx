@@ -1,8 +1,10 @@
 import { Add, Remove } from "@material-ui/icons";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { Link } from 'react-router-dom'
 
 const Container = styled.div``;
 
@@ -12,7 +14,8 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  font-weight: 300;
+  font-weight: 500;
+  font-size: 25px;
   text-align: center;
 `;
 
@@ -33,111 +36,120 @@ const TopButton = styled.button`
   color: ${(props) => props.type === "filled" && "white"};
 `;
 
-const TopTexts = styled.div`
-  ${mobile({ display: "none" })}
-`;
-const TopText = styled.span`
-  text-decoration: underline;
-  cursor: pointer;
-  margin: 0px 10px;
-`;
-
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
   ${mobile({ flexDirection: "column" })}
-
 `;
 
 const Info = styled.div`
-  flex: 3;
+    flex: 3;
 `;
 
 const Product = styled.div`
-  display: flex;
-  justify-content: space-between;
-  ${mobile({ flexDirection: "column" })}
+    display: flex;
+    align-items: center;
+    ${mobile({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
-  flex: 2;
-  display: flex;
+    display: flex;
+    align-items: center;
+    flex: 1;
 `;
 
 const Image = styled.img`
-  width: 200px;
+    width: 200px;
 `;
 
 const Details = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+    padding: 20px;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
 `;
 
-const ProductName = styled.span``;
-
-const ProductId = styled.span``;
+const ProductName = styled.h2`
+    font-size: 20px;
+    font-weight: 500;
+    width: 35%;
+`;
 
 const ProductColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: ${(props) => props.color};
 `;
 
-const ProductSize = styled.span``;
+const ProductSize = styled.span`
+    font-size: 18px;
+`;
 
 const PriceDetail = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
 `;
 
 const ProductAmountContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    border: 2px solid #d4d3d3;
+    padding: 8px;
 `;
 
 const ProductAmount = styled.div`
-  font-size: 24px;
-  margin: 5px;
-  ${mobile({ margin: "5px 15px" })}
+    font-size: 22px;
+    width: 80px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px 5px;
+    ${mobile({ margin: "5px 15px" })}
 `;
 
 const ProductPrice = styled.div`
-  font-size: 30px;
-  font-weight: 200;
-  ${mobile({ marginBottom: "20px" })}
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 10px;
+    ${mobile({ marginBottom: "20px" })}
 `;
 
 const Hr = styled.hr`
-  background-color: #eee;
-  border: none;
-  height: 1px;
+    background-color: #eee;
+    border: none;
+    height: 1px;
 `;
 
+const Divider = styled.div`
+    height: 1px;
+    background: #979797;
+`
+
 const Summary = styled.div`
-  flex: 1;
-  border: 0.5px solid lightgray;
-  border-radius: 10px;
-  padding: 20px;
-  height: 50vh;
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 25px;
+    height: 60vh;
 `;
 
 const SummaryTitle = styled.h1`
-  font-weight: 200;
+    font-weight: 500;
+    font-size: 20px;
 `;
 
 const SummaryItem = styled.div`
-  margin: 30px 0px;
-  display: flex;
-  justify-content: space-between;
-  font-weight: ${(props) => props.type === "total" && "500"};
-  font-size: ${(props) => props.type === "total" && "24px"};
+    margin: 30px 0px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: ${(props) => props.type === "total" && "500"};
+    font-size: ${(props) => props.type === "total" && "24px"};
 `;
 
 const SummaryItemText = styled.span``;
@@ -145,104 +157,79 @@ const SummaryItemText = styled.span``;
 const SummaryItemPrice = styled.span``;
 
 const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  background-color: black;
-  color: white;
-  font-weight: 600;
+    width: 100%;
+    padding: 15px;
+    background-color: #ff5f6d;
+    color: white;
+    font-weight: 600;
+    font-size: 17px;
+    border: none;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <Container>
-      <Navbar />
-      <Wrapper>
-        <Title>YOUR BAG</Title>
-        <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
-          <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
-          </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
-        </Top>
-        <Bottom>
-          <Info>
-            <Product>
-              <ProductDetail>
-                <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> JESSIE THUNDER SHOES
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
-              </PriceDetail>
-            </Product>
-            <Hr />
-            <Product>
-              <ProductDetail>
-                <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> HAKURA T-SHIRT
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 93813718293
-                  </ProductId>
-                  <ProductColor color="gray" />
-                  <ProductSize>
-                    <b>Size:</b> M
-                  </ProductSize>
-                </Details>
-              </ProductDetail>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>1</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 20</ProductPrice>
-              </PriceDetail>
-            </Product>
-          </Info>
-          <Summary>
-            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
-            <SummaryItem>
-              <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>$ 5.90</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>$ -5.90</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem type="total">
-              <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
-            </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
-          </Summary>
-        </Bottom>
-      </Wrapper>
-      <Footer />
+        <Navbar />
+        <Wrapper>
+            <Title>MY BAG</Title>
+            <Top>
+            <Link to="/">
+                <TopButton>CONTINUE SHOPPING</TopButton>
+            </Link>
+            </Top>
+            <Bottom>
+                <Info>
+                    {cart.products.map((product) => (
+                    <Product>
+                        <ProductDetail>
+                            <Image src={product.img} />
+                            <Details>
+                                <ProductName>
+                                    {product.title}
+                                </ProductName>
+                                <ProductColor color={product.color} />
+                                <ProductSize>
+                                    <b>Size:</b> {product.size}
+                                </ProductSize>
+                            </Details>
+                        </ProductDetail>
+                        <PriceDetail>
+                            <ProductAmountContainer>
+                                <Add />
+                                <ProductAmount>{product.quantity}</ProductAmount>
+                                <Remove />
+                            </ProductAmountContainer>
+                            <ProductPrice>
+                                $ {product.price * product.quantity}
+                            </ProductPrice>
+                        </PriceDetail>
+                    </Product>
+                    ))}
+                    <Hr />
+                </Info>
+                <Summary>
+                    <SummaryTitle>Total</SummaryTitle>
+                    <SummaryItem>
+                        <SummaryItemText>Shipping & Handling:</SummaryItemText>
+                        <SummaryItemPrice>Free</SummaryItemPrice>
+                    </SummaryItem>
+                    <SummaryItem>
+                        <SummaryItemText>Total product:</SummaryItemText>
+                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                    </SummaryItem>
+                    <Divider />
+                    <SummaryItem type="total">
+                        <SummaryItemText>Subtotal</SummaryItemText>
+                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
+                    </SummaryItem>
+                    <Button>Check out</Button>
+                </Summary>
+            </Bottom>
+        </Wrapper>
+        <Footer />
     </Container>
   );
 };
