@@ -112,11 +112,11 @@ const Login = () => {
                 <Title>Log in</Title>
                 <Form>
                     <Input
-                        placeholder="username"
+                        placeholder="Username"
                         onChange={(e) => setUsername(e.target.value)}
                     />
                     <Input
-                        placeholder="password"
+                        placeholder="Password"
                         type="password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
