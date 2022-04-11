@@ -96,6 +96,13 @@ const ButtonRegister = styled.button`
     }
 `
 
+const DisplayUser = styled.p`
+    & a {
+        color: #000;
+        text-decoration: none;
+    }
+`
+
 const Navbar = () => {
     const quantity = useSelector(state=>state.cart.quantity)
     const user = useSelector((state) => state.user.currentUser)
@@ -113,7 +120,8 @@ const Navbar = () => {
                     <Link to="/"><Logo src={logo}></Logo></Link>
                 </Center>
                 <Right>
-                    { user ? user.username :  
+                    { user ? <DisplayUser><Link to="/profile">{user.username}</Link></DisplayUser>
+                            :  
                         <AuthContainer>
                             <MenuItem>
                                 <Link to="/register">
