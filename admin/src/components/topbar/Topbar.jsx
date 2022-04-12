@@ -10,7 +10,7 @@ export default function Topbar() {
 
     const onLogout = () => {
         console.log('log out!')
-        logout(dispatch);
+        // logout(dispatch);
     }
 
     return (

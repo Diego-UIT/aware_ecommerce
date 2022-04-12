@@ -25,10 +25,6 @@ export const login = async (dispatch, user) => {
     }
 };
 
-export const logout = async (dispatch) => {
-    dispatch(logout());
-};
-
 export const getProducts = async (dispatch) => {
     dispatch(getProductStart());
     try {
@@ -52,8 +48,8 @@ export const deleteProduct = async (id, dispatch) => {
 export const updateProduct = async (id, product, dispatch) => {
     dispatch(updateProductStart());
     try {
-        // update
-        dispatch(updateProductSuccess({ id, product }));
+        const res = await userRequest.put(`/products/${id}`, product);
+        dispatch(updateProductSuccess(res.data));
     } catch (err) {
         dispatch(updateProductFailure());
     }

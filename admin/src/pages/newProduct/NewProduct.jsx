@@ -9,11 +9,14 @@ import {
 import app from "../../firebase";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
+import Swal from 'sweetalert2'
 
 export default function NewProduct() {
     const [inputs, setInputs] = useState({});
     const [file, setFile] = useState(null);
     const [cat, setCat] = useState([]);
+    const [color, setColor] = useState([]);
+    const [size, setSize] = useState([]);
     const dispatch = useDispatch();
 
     const handleChange = (e) => {
@@ -23,6 +26,14 @@ export default function NewProduct() {
     };
     const handleCat = (e) => {
         setCat(e.target.value.split(","));
+    };
+
+    const handleColor = (e) => {
+        setColor(e.target.value.split(","));
+    };
+
+    const handleSize = (e) => {
+        setSize(e.target.value.split(","));
     };
 
     const handleClick = (e) => {
@@ -53,8 +64,15 @@ export default function NewProduct() {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                const product = { ...inputs, img: downloadURL, categories: cat };
-                addProduct(product, dispatch);
+                    const product = { ...inputs, img: downloadURL, categories: cat, color: color, size: size };
+                    addProduct(product, dispatch);
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Add successfully!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 });
             }
         );
@@ -65,50 +83,49 @@ export default function NewProduct() {
         <h1 className="addProductTitle">New Product</h1>
         <form className="addProductForm">
             <div className="addProductItem">
-            <label>Image</label>
-            <input
-                type="file"
-                id="file"
-                onChange={(e) => setFile(e.target.files[0])}
-            />
+                <label>Image</label>
+                <input
+                    type="file"
+                    id="file"
+                    onChange={(e) => setFile(e.target.files[0])}
+                />
             </div>
             <div className="addProductItem">
-            <label>Title</label>
-            <input
-                name="title"
-                type="text"
-                placeholder="Apple Airpods"
-                onChange={handleChange}
-            />
+                <label>Title</label>
+                <input
+                    name="title"
+                    type="text"
+                    placeholder="Apple Airpods"
+                    onChange={handleChange}
+                />
             </div>
             <div className="addProductItem">
-            <label>Description</label>
-            <input
-                name="desc"
-                type="text"
-                placeholder="description..."
-                onChange={handleChange}
-            />
+                <label>Price</label>
+                <input
+                    name="price"
+                    type="number"
+                    placeholder="100"
+                    onChange={handleChange}
+                />
             </div>
             <div className="addProductItem">
-            <label>Price</label>
-            <input
-                name="price"
-                type="number"
-                placeholder="100"
-                onChange={handleChange}
-            />
+                <label>Categories</label>
+                <input type="text" placeholder="jeans, skirts" onChange={handleCat} />
             </div>
             <div className="addProductItem">
-            <label>Categories</label>
-            <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
+                <label>Colors</label>
+                <input type="text" placeholder="red, pink, gray" onChange={handleColor} />
             </div>
             <div className="addProductItem">
-            <label>Stock</label>
-            <select name="inStock" onChange={handleChange}>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select>
+                <label>Size</label>
+                <input type="text" placeholder="S, M, L" onChange={handleSize} />
+            </div>
+            <div className="addProductItem">
+                <label>Stock</label>
+                <select name="inStock" onChange={handleChange}>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
             </div>
             <button onClick={handleClick} className="addProductButton">
             Create
