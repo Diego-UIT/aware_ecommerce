@@ -60,7 +60,9 @@ const List = styled.ul`
     justify-content: space-between;
 `;
 
-const ListItem = styled.li``;
+const ListItem = styled.li`
+    color: #b7b7b7;
+`;
 
 const Right = styled.div`
     flex: 1;

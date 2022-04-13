@@ -1,4 +1,4 @@
-import "./sidebar.css";
+import "./sidebar.scss";
 import {
   LineStyle,
   PermIdentity,
@@ -11,35 +11,35 @@ import { Link } from "react-router-dom";
 export default function Sidebar() {
     return (
         <div className="sidebar">
-            <div className="sidebarWrapper">
-                <div className="sidebarMenu">
-                    <ul className="sidebarList">
+            <div className="wrapper">
+                <div className="sidebar-menu">
+                    <ul className="sidebar-menu__list">
                         <Link to="/" className="link">
-                            <li className="sidebarListItem active">
-                                <LineStyle className="sidebarIcon" />
+                            <li className="sidebar-menu__list__item active">
+                                <LineStyle className="icon" />
                                 Overview
                             </li>
                         </Link>
                         <Link to="/users" className="link">
-                            <li className="sidebarListItem">
-                                <PermIdentity className="sidebarIcon" />
+                            <li className="sidebar-menu__list__item">
+                                <PermIdentity className="icon" />
                                 Users
                             </li>
                         </Link>
                         <Link to="/products" className="link">
-                            <li className="sidebarListItem">
-                                <Storefront className="sidebarIcon" />
+                            <li className="sidebar-menu__list__item">
+                                <Storefront className="icon" />
                                 Products
                             </li>
                         </Link>
                         <Link to="/orders" className="link">
-                            <li className="sidebarListItem">
-                                <AttachMoney className="sidebarIcon" />
+                            <li className="sidebar-menu__list__item">
+                                <AttachMoney className="icon" />
                                 Orders
                             </li>
                         </Link>
-                        <li className="sidebarListItem">
-                            <Settings className="sidebarIcon" />
+                        <li className="sidebar-menu__list__item">
+                            <Settings className="icon" />
                             Setting
                         </li>
                     </ul>

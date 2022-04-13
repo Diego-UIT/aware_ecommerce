@@ -1,4 +1,4 @@
-import "./orders.css";
+import "./orders.scss";
 import { DataGrid } from "@material-ui/data-grid";
 import { userRequest } from "../../requestMethods";
 import { useState, useEffect } from "react";
@@ -18,7 +18,7 @@ export default function UserList() {
     }, []);
 
     const Button = ({ type }) => {
-        return <button className={"orderStatusButton " + type}>{type}</button>;
+        return <button className={"ordersStatus__btn " + type}>{type}</button>;
       };
 
     const columns = [
@@ -40,7 +40,7 @@ export default function UserList() {
           renderCell: (params) => {
               console.log(params.row.status)
             return (
-              <div className="orderStatus">
+              <div className="ordersStatus">
                 <Button type={params.row.status} />
               </div>
             );

@@ -1,5 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
-import "./product.css";
+import { useLocation } from "react-router-dom";
+import "./product.scss";
 import { Publish } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
@@ -56,49 +56,49 @@ export default function Product() {
 
     return (
         <div className="product">
-            <div className="productTitleContainer">
-                <h1 className="productTitle">Product</h1>
+            <div className="title-container">
+                <h1 className="title-container__title">Product</h1>
             </div>
-            <div className="productBottom">
-                <form className="productForm">
-                <div className="productFormLeft">
-                    <label>Product Name</label>
-                    <input
-                        name="title"
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                    <label>Price</label>
-                    <input 
-                        name="price" 
-                        type="text" 
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                    />
-                    <label>Categories</label>
-                    <input type="text" value={cat} onChange={handleCat} />
-                    <label>Size</label>
-                    <input type="text" value={size} onChange={handleSize} />
-                    <label>Colors</label>
-                    <input type="text" value={color} onChange={handleColor} />
-                    <label>In Stock</label>
-                    <select name="inStock" id="idStock" onChange={(e) => setInStock(e.target.value)}>
-                        <option value={inStock}>{product.inStock ? 'Yes' : 'No'}</option>
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
-                </div>
-                <div className="productFormRight">
-                    <div className="productUpload">
-                        <img src={product.img} alt="" className="productUploadImg" />
-                        <label for="file">
-                            <Publish />
-                        </label>
-                        <input type="file" id="file" style={{ display: "none" }} />
+            <div className="product-bottom">
+                <form className="product-bottom__form">
+                    <div className="product-bottom__form__formLeft">
+                        <label>Product Name</label>
+                        <input
+                            name="title"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <label>Price</label>
+                        <input 
+                            name="price" 
+                            type="text" 
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
+                        <label>Categories</label>
+                        <input type="text" value={cat} onChange={handleCat} />
+                        <label>Size</label>
+                        <input type="text" value={size} onChange={handleSize} />
+                        <label>Colors</label>
+                        <input type="text" value={color} onChange={handleColor} />
+                        <label>In Stock</label>
+                        <select name="inStock" id="idStock" onChange={(e) => setInStock(e.target.value)}>
+                            <option value={inStock}>{product.inStock ? 'Yes' : 'No'}</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <div className="product-bottom__form__formRight">
+                        <div className="upload">
+                            <img src={product.img} alt="" className="upload__img" />
+                            <label for="file">
+                                <Publish />
+                            </label>
+                            <input type="file" id="file" style={{ display: "none" }} />
                         </div>
-                    <button onClick={handleUpdate} className="productButton">Update</button>
-                </div>
+                        <button onClick={handleUpdate} className="btnUpdate">Update</button>
+                    </div>
                 </form>
             </div>
         </div>

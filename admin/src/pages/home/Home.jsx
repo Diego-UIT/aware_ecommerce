@@ -1,5 +1,5 @@
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
-import "./home.css";
+import "./home.scss";
 
 export default function Home() {
   return (

@@ -1,8 +1,8 @@
-import "./productList.css";
+import "./product-list.scss";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/callAPI";
 import moment from 'moment'
@@ -27,8 +27,8 @@ export default function ProductList() {
           width: 400,
           renderCell: (params) => {
             return (
-              <div className="productListItem">
-                <img className="productListImg" src={params.row.img} alt="" />
+              <div className="product-list__item">
+                <img className="product-list__item__img" src={params.row.img} alt="" />
                 {params.row.title}
               </div>
             );
@@ -52,10 +52,10 @@ export default function ProductList() {
             return (
               <>
                 <Link to={"/product/" + params.row._id}>
-                  <button className="productListEdit">Edit</button>
+                  <button className="product-list__edit">Edit</button>
                 </Link>
                 <DeleteOutline
-                  className="productListDelete"
+                  className="product-list__delete"
                   onClick={() => handleDelete(params.row._id)}
                 />
               </>
@@ -65,11 +65,11 @@ export default function ProductList() {
     ];
 
     return (
-        <div className="productList">
-            <div className="productTitleContainer">
-                <h2 className="productTitle">Products</h2>
+        <div className="product-list">
+            <div className="product-list__header">
+                <h2 className="product-list__header__title">Products</h2>
                 <Link to="/newproduct">
-                    <button className="productAddButton">Add product</button>
+                    <button className="product-list__header__btnAdd">Add product</button>
                 </Link>
             </div>
             <DataGrid

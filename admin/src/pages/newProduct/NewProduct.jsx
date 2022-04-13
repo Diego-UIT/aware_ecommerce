@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./newProduct.css";
+import "./newProduct.scss";
 import {
   getStorage,
   ref,
@@ -79,58 +79,58 @@ export default function NewProduct() {
     };
 
     return (
-        <div className="newProduct">
-        <h1 className="addProductTitle">New Product</h1>
-        <form className="addProductForm">
-            <div className="addProductItem">
-                <label>Image</label>
-                <input
-                    type="file"
-                    id="file"
-                    onChange={(e) => setFile(e.target.files[0])}
-                />
-            </div>
-            <div className="addProductItem">
-                <label>Title</label>
-                <input
-                    name="title"
-                    type="text"
-                    placeholder="Apple Airpods"
-                    onChange={handleChange}
-                />
-            </div>
-            <div className="addProductItem">
-                <label>Price</label>
-                <input
-                    name="price"
-                    type="number"
-                    placeholder="100"
-                    onChange={handleChange}
-                />
-            </div>
-            <div className="addProductItem">
-                <label>Categories</label>
-                <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
-            </div>
-            <div className="addProductItem">
-                <label>Colors</label>
-                <input type="text" placeholder="red, pink, gray" onChange={handleColor} />
-            </div>
-            <div className="addProductItem">
-                <label>Size</label>
-                <input type="text" placeholder="S, M, L" onChange={handleSize} />
-            </div>
-            <div className="addProductItem">
-                <label>Stock</label>
-                <select name="inStock" onChange={handleChange}>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
-                </select>
-            </div>
-            <button onClick={handleClick} className="addProductButton">
-            Create
-            </button>
-        </form>
+        <div className="new-product">
+            <h1 className="product-title">New Product</h1>
+            <form className="product-form">
+                <div className="product-form__item">
+                    <label>Image</label>
+                    <input
+                        type="file"
+                        id="file"
+                        onChange={(e) => setFile(e.target.files[0])}
+                    />
+                </div>
+                <div className="product-form__item">
+                    <label>Title</label>
+                    <input
+                        name="title"
+                        type="text"
+                        placeholder="Apple Airpods"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="product-form__item">
+                    <label>Price</label>
+                    <input
+                        name="price"
+                        type="number"
+                        placeholder="100"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div className="product-form__item">
+                    <label>Categories</label>
+                    <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
+                </div>
+                <div className="product-form__item">
+                    <label>Colors</label>
+                    <input type="text" placeholder="red, pink, gray" onChange={handleColor} />
+                </div>
+                <div className="product-form__item">
+                    <label>Size</label>
+                    <input type="text" placeholder="S, M, L" onChange={handleSize} />
+                </div>
+                <div className="product-form__item">
+                    <label>Stock</label>
+                    <select name="inStock" onChange={handleChange}>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+                <button onClick={handleClick} className="product-form__btnAdd">
+                    Create
+                </button>
+            </form>
         </div>
     );
 }

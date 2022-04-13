@@ -1,4 +1,4 @@
-import "./featuredInfo.css"
+import "./featuredInfo.scss"
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons"
 import { useEffect, useState } from "react"
 import { userRequest } from "../../requestMethods"
@@ -21,20 +21,20 @@ const FeaturedInfo = () => {
 
     return (
         <div className="featured">
-            <div className="featuredItem">
-                <span className="featuredTitle">Revanue</span>
-                <div className="featuredMoneyContainer">
-                <span className="featuredMoney">${income[0]?.total}</span>
-                <span className="featuredMoneyRate">
-                    %{Math.floor(perc)}{" "}
-                    {perc < 0 ? (
-                    <ArrowDownward className="featuredIcon negative" />
-                    ) : (
-                    <ArrowUpward className="featuredIcon" />
-                    )}
-                </span>
+            <div className="featured-item">
+                <span className="featured-item__title">Revanue</span>
+                <div className="money-container">
+                    <span className="money-container__money">${income[0]?.total}</span>
+                    <span className="money-container__rate">
+                        %{Math.floor(perc)}{" "}
+                        {perc < 0 ? (
+                        <ArrowDownward className="money-container__icon negative" />
+                        ) : (
+                        <ArrowUpward className="money-container__icon" />
+                        )}
+                    </span>
                 </div>
-                <span className="featuredSub">Compared to last month</span>
+                <span className="featured-sub">Compared to last month</span>
             </div>
         </div>
     )
