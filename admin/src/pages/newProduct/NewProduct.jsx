@@ -7,7 +7,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import app from "../../firebase";
-import { addProduct } from "../../redux/apiCalls";
+import { addProduct } from "../../redux/callAPI";
 import { useDispatch } from "react-redux";
 import Swal from 'sweetalert2'
 
@@ -110,7 +110,7 @@ export default function NewProduct() {
             </div>
             <div className="addProductItem">
                 <label>Categories</label>
-                <input type="text" placeholder="jeans, skirts" onChange={handleCat} />
+                <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
             </div>
             <div className="addProductItem">
                 <label>Colors</label>

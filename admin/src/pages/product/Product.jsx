@@ -3,7 +3,7 @@ import "./product.css";
 import { Publish } from "@material-ui/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { updateProduct } from "../../redux/apiCalls";
+import { updateProduct } from "../../redux/callAPI";
 import Swal from 'sweetalert2'
 
 export default function Product() {
@@ -58,9 +58,6 @@ export default function Product() {
         <div className="product">
             <div className="productTitleContainer">
                 <h1 className="productTitle">Product</h1>
-                <Link to="/newproduct">
-                    <button className="productAddButton">Create</button>
-                </Link>
             </div>
             <div className="productBottom">
                 <form className="productForm">

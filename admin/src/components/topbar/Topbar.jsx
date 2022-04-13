@@ -2,7 +2,7 @@ import React from "react";
 import "./topbar.css";
 import { NotificationsNone } from "@material-ui/icons";
 import logo from "../../assets/images/logo@2x.png"
-import { logout } from "../../redux/apiCalls"
+import { logout } from "../../redux/callAPI"
 import { useDispatch } from "react-redux"
 
 export default function Topbar() {

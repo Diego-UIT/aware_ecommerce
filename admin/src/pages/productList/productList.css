@@ -2,6 +2,31 @@
     flex: 4;
 }
 
+.productTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 20px;
+  }
+  
+  .productAddButton {
+    width: 150px;
+    border:none;
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: #ffa15f;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 400;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+  
+  .productAddButton:hover {
+    opacity: 0.8;
+  }
+  
+
 .productListItem{
     display: flex;
     align-items: center;
