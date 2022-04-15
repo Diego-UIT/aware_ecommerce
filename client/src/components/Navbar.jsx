@@ -104,7 +104,7 @@ const DisplayUser = styled.p`
 `
 
 const Navbar = () => {
-    const quantity = useSelector(state=>state.cart.quantity)
+    const cart = useSelector(state=>state.cart.value)
     const user = useSelector((state) => state.user.currentUser)
 
     return (
@@ -141,7 +141,7 @@ const Navbar = () => {
                     }
                     <Link to="/cart">
                         <MenuItem>
-                            <Badge badgeContent={quantity} color="secondary">
+                            <Badge badgeContent={cart.length} color="secondary">
                             <ShoppingCartOutlined />
                             </Badge>
                         </MenuItem>

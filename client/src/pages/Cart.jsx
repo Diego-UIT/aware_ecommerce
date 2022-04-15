@@ -1,5 +1,6 @@
-import { Add, Remove } from "@material-ui/icons";
 import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import CartItem from "../components/CartItem"
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -28,12 +29,16 @@ const Top = styled.div`
 
 const TopButton = styled.button`
   padding: 10px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  border: ${(props) => props.type === "filled" && "none"};
-  background-color: ${(props) =>
-    props.type === "filled" ? "black" : "transparent"};
-  color: ${(props) => props.type === "filled" && "white"};
+  border: 1.5px solid #000;
+  background-color: transparent;
+  color: #000;
+  transition: color .3s ease;
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
 `;
 
 const Bottom = styled.div`
@@ -44,81 +49,6 @@ const Bottom = styled.div`
 
 const Info = styled.div`
     flex: 3;
-`;
-
-const Product = styled.div`
-    display: flex;
-    align-items: center;
-    ${mobile({ flexDirection: "column" })}
-`;
-
-const ProductDetail = styled.div`
-    display: flex;
-    align-items: center;
-    flex: 1;
-`;
-
-const Image = styled.img`
-    width: 200px;
-`;
-
-const Details = styled.div`
-    padding: 20px;
-    display: flex;
-    flex-grow: 1;
-    justify-content: space-between;
-`;
-
-const ProductName = styled.h2`
-    font-size: 20px;
-    font-weight: 500;
-    width: 35%;
-`;
-
-const ProductColor = styled.div`
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: ${(props) => props.color};
-`;
-
-const ProductSize = styled.span`
-    font-size: 18px;
-`;
-
-const PriceDetail = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    flex: 1;
-`;
-
-const ProductAmountContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 400;
-    border: 2px solid #d4d3d3;
-    padding: 8px;
-`;
-
-const ProductAmount = styled.div`
-    font-size: 22px;
-    width: 80px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0px 5px;
-    ${mobile({ margin: "5px 15px" })}
-`;
-
-const ProductPrice = styled.div`
-    font-size: 25px;
-    font-weight: 600;
-    margin-top: 10px;
-    ${mobile({ marginBottom: "20px" })}
 `;
 
 const Hr = styled.hr`
@@ -168,70 +98,52 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
-  const cart = useSelector((state) => state.cart);
+    const carts = useSelector((state) => state.cart.value)
+    const [totalPrice, setTotalPrice] = useState(0)
 
-  return (
-    <Container>
-        <Navbar />
-        <Wrapper>
-            <Title>MY BAG</Title>
-            <Top>
-            <Link to="/">
-                <TopButton>CONTINUE SHOPPING</TopButton>
-            </Link>
-            </Top>
-            <Bottom>
-                <Info>
-                    {cart.products.map((product) => (
-                    <Product>
-                        <ProductDetail>
-                            <Image src={product.img} />
-                            <Details>
-                                <ProductName>
-                                    {product.title}
-                                </ProductName>
-                                <ProductColor color={product.color} />
-                                <ProductSize>
-                                    <b>Size:</b> {product.size}
-                                </ProductSize>
-                            </Details>
-                        </ProductDetail>
-                        <PriceDetail>
-                            <ProductAmountContainer>
-                                <Add />
-                                <ProductAmount>{product.quantity}</ProductAmount>
-                                <Remove />
-                            </ProductAmountContainer>
-                            <ProductPrice>
-                                $ {product.price * product.quantity}
-                            </ProductPrice>
-                        </PriceDetail>
-                    </Product>
-                    ))}
-                    <Hr />
-                </Info>
-                <Summary>
-                    <SummaryTitle>Total</SummaryTitle>
-                    <SummaryItem>
-                        <SummaryItemText>Shipping & Handling:</SummaryItemText>
-                        <SummaryItemPrice>Free</SummaryItemPrice>
-                    </SummaryItem>
-                    <SummaryItem>
-                        <SummaryItemText>Total product:</SummaryItemText>
-                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
-                    </SummaryItem>
-                    <Divider />
-                    <SummaryItem type="total">
-                        <SummaryItemText>Subtotal</SummaryItemText>
-                        <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
-                    </SummaryItem>
-                    <Button>Check out</Button>
-                </Summary>
-            </Bottom>
-        </Wrapper>
-        <Footer />
-    </Container>
-  );
+    useEffect(() => {
+        setTotalPrice(carts.reduce((total, item) => total + (Number(item.quantity) * Number(item.price)), 0))
+    }, [carts])
+
+    return (
+        <Container>
+            <Navbar />
+            <Wrapper>
+                <Title>MY BAG</Title>
+                <Top>
+                <Link to="/">
+                    <TopButton>CONTINUE SHOPPING</TopButton>
+                </Link>
+                </Top>
+                <Bottom>
+                    <Info>
+                        {carts.map((item, i) => (
+                            <CartItem key={i} item={item}/>
+                        ))}
+                        <Hr />
+                    </Info>
+                    <Summary>
+                        <SummaryTitle>Total</SummaryTitle>
+                        <SummaryItem>
+                            <SummaryItemText>Shipping & Handling:</SummaryItemText>
+                            <SummaryItemPrice>Free</SummaryItemPrice>
+                        </SummaryItem>
+                        <SummaryItem>
+                            <SummaryItemText>Total product:</SummaryItemText>
+                            <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
+                        </SummaryItem>
+                        <Divider />
+                        <SummaryItem type="total">
+                            <SummaryItemText>Subtotal</SummaryItemText>
+                            <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
+                        </SummaryItem>
+                        <Button>Check out</Button>
+                    </Summary>
+                </Bottom>
+            </Wrapper>
+            <Footer />
+        </Container>
+    );
 };
 
 export default Cart;

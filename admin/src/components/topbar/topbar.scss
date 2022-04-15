@@ -21,7 +21,7 @@
             }
         }
 
-        .topRight{
+        .topRight {
             display: flex;
             align-items: center;
 
@@ -35,6 +35,17 @@
 
             &__name {
                 padding-left: 10px;
+            }
+
+            &__logout {
+                border:none;
+                border-radius: 10px;
+                padding: 5px;
+                background-color: #ffa15f;
+                color: #fff;
+                cursor: pointer;
+                font-weight: 400;
+                margin-left: 10px;
             }
 
             &__icon {
@@ -61,3 +72,6 @@
         }
     }
 }
+
+
+  

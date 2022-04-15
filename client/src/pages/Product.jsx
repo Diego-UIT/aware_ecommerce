@@ -6,25 +6,31 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
-import { addProduct } from "../redux/cartReducer";
+import { addItem } from "../redux/cartReducer";
 import { useDispatch } from "react-redux";
+import Swal from 'sweetalert2'
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
-  padding: 50px;
-  display: flex;
-  ${mobile({ padding: "10px", flexDirection: "column" })}
+    padding: 50px;
+    display: flex;
+    ${mobile({ padding: "10px", flexDirection: "column" })}
 `;
 
 const ImgContainer = styled.div`
-  flex: 1;
+    flex: 1;
+    padding-top: 50%;
+    position: relative;
+    overflow: hidden;
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 90vh;
   object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   ${mobile({ height: "40vh" })}
 `;
 
@@ -58,7 +64,12 @@ const Filter = styled.div`
 
 const FilterTitle = styled.span`
   font-size: 20px;
-  font-weight: 200;
+  font-weight: 400;
+`;
+
+const AddTitle = styled.span`
+  font-size: 20px;
+  font-weight: 400;
 `;
 
 const FilterColor = styled.div`
@@ -93,6 +104,7 @@ const AmountContainer = styled.div`
   font-weight: 400;
   border: 2px solid #d4d3d3;
   width: 50%;
+  margin-top: 10px;
 `;
 
 const Amount = styled.span`
@@ -133,8 +145,8 @@ const Product = () => {
     const id = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
-    const [color, setColor] = useState("");
-    const [size, setSize] = useState("");
+    const [color, setColor] = useState(undefined);
+    const [size, setSize] = useState(undefined);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -155,11 +167,38 @@ const Product = () => {
         }
     };
 
+    const check = () => {
+        if (size === undefined) {
+            Swal.fire({
+                title: 'Please choose size!',
+                icon: 'info',
+              })
+            return false
+        }
+        if (color === undefined) {
+            Swal.fire({
+                title: 'Please choose color!',
+                icon: 'info',
+              })
+            return false
+        }
+        return true
+    }
+
     const handleClick = () => {
-        dispatch(
-          addProduct({ ...product, quantity, color, size })
-        );
-      };
+        if (check()) {
+            dispatch(
+                addItem({ ...product, quantity, color, size })
+            );
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'You have added a product to your cart!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    };
 
     return (
         <Container>
@@ -190,6 +229,7 @@ const Product = () => {
                         </Filter>
                     </FilterContainer>
                     <AddContainer>
+                        <AddTitle>Quantity</AddTitle>
                         <AmountContainer>
                             <Remove onClick={() => handleQuantity("dec")} />
                             <Amount>{quantity}</Amount>
