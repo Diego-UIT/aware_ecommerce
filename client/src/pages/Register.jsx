@@ -2,7 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import {mobile} from "../responsive";
 import { register } from "../redux/callAPI";
-import { useDispatch, useSelector } from "react-redux";
+import FormInput from "../components/FormInput"
+import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux";
 
 const Container = styled.div`
     width: 100vw;
@@ -38,16 +40,6 @@ const Form = styled.form`
     flex-direction: column;
 `;
 
-const Input = styled.input`
-    flex: 1;
-    min-width: 40%;
-    margin: 10px 0;
-    padding: 15px;
-    background: #f6f6f6;
-    border: none;
-    outline: none;
-`;
-
 const Button = styled.button`
     width: 100%;
     border: none;
@@ -66,15 +58,6 @@ const Button = styled.button`
     }
 `;
 
-const Link = styled.a`
-    margin: 5px 0px;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: right;
-    text-decoration: none;
-    cursor: pointer;
-`;
-
 const LinkLogin = styled.div`
     margin-top: 10px;
     text-align: center;
@@ -85,61 +68,88 @@ const LinkLogin = styled.div`
         font-size: 16px;
     }
 `
-const Agreement = styled.span`
-    font-size: 13px;
-    margin: 20px 0px;
-    text-align: center;
-    & b {
-        color: #ff7413;
-        text-decoration: underline;
-    }
-`;
-
 const Hr = styled.hr`
     background-color: #eee;
     border: none;
     height: 0.5px;
 `;
 
-const Error = styled.span`
-    color: red;
-`;
-
 const Register = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
     const dispatch = useDispatch();
-    const { isFetching, error } = useSelector((state) => state.user);
 
-    const handleClick = (e) => {
+    const [values, setValues] = useState({
+        username: "",
+        email: "",
+        password: "",
+      });
+    
+    const inputs = [
+        {
+          id: 1,
+          name: "username",
+          type: "text",
+          placeholder: "Username",
+          errorMessage:
+            "Username should be 3-16 characters and shouldn't include any special character!",
+          label: "Username",
+          pattern: "^[A-Za-z0-9]{3,16}$",
+          required: true,
+        },
+        {
+          id: 2,
+          name: "email",
+          type: "email",
+          placeholder: "Email",
+          errorMessage: "It should be a valid email address!",
+          label: "Email",
+          required: true,
+        },
+        {
+          id: 3,
+          name: "password",
+          type: "password",
+          placeholder: "Password",
+          errorMessage:
+            "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
+          label: "Password",
+          pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+          required: true,
+        },
+        {
+            id: 4,
+            name: "confirmPassword",
+            type: "password",
+            placeholder: "Confirm Password",
+            errorMessage: "Passwords don't match!",
+            label: "Confirm Password",
+            pattern: values.password,
+            required: true,
+        },
+    ];
+    
+    const handleSubmit = (e) => {
         e.preventDefault();
-        register(dispatch, { username, email, password });
+        register(dispatch, values);
+    };
+    
+    const onChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
     };
 
     return (
         <Container>
             <Wrapper>
                 <Title>Register</Title>
-                <Form>
-                    <Input
-                        placeholder="Name"
-                        onChange={(e) => setUsername(e.target.value)}
+                <Form onSubmit={handleSubmit}>
+                {inputs.map((input) => (
+                    <FormInput
+                        key={input.id}
+                        {...input}
+                        value={values[input.name]}
+                        onChange={onChange}
                     />
-                    <Input
-                        placeholder="Email"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <Input
-                        placeholder="password"
-                        type="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                {error && <Error>Something went wrong...</Error>}
-                <Agreement>
-                    By creating an account you agree to the <b>Terms of Service</b> and <b>Privacy Policy</b>
-                </Agreement>
-                <Button onClick={handleClick} disabled={isFetching}>Register</Button>
+                    ))}
+                    <Button>Register</Button>
                 </Form>
                 <Hr />
                 <LinkLogin>

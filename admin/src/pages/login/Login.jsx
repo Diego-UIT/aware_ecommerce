@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom'
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, Link } from 'react-router-dom'
 import { login } from "../../redux/callAPI";
 import background from "../../assets/images/rectangle-5@2x.png"
 import styled from "styled-components";
@@ -67,29 +67,14 @@ const Button = styled.button`
     }
 `;
 
-const Link = styled.a`
-    font-size: 13px;
-    font-weight: 500;
-    text-align: right;
-    text-decoration: none;
-    cursor: pointer;
-    color: #fff;
-`;
-
 const LinkRegister = styled.div`
     margin-top: 5px;
     text-align: center;
 `
-
-const Error = styled.span`
-  color: red;
-`;
-
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
-    const { isFetching, error } = useSelector((state) => state.user);
     const navigate = useNavigate()
 
     const handleClick = (e) => {
@@ -112,8 +97,7 @@ const Login = () => {
                         type="password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    {error && <Error>Something went wrong...</Error>}
-                    <Button onClick={handleClick} disabled={isFetching}>
+                    <Button onClick={handleClick}>
                         LOGIN
                     </Button>
                 </Form>

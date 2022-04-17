@@ -2,7 +2,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import {mobile} from "../responsive";
 import { login } from "../redux/callAPI";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux";
+import FormInput from "../components/FormInput"
 
 const Container = styled.div`
     width: 100vw;
@@ -38,15 +40,6 @@ const Form = styled.form`
     flex-direction: column;
 `;
 
-const Input = styled.input`
-    flex: 1;
-    min-width: 40%;
-    margin: 10px 0;
-    padding: 15px;
-    background: #f6f6f6;
-    border: none;
-    outline: none;
-`;
 
 const Button = styled.button`
     width: 100%;
@@ -66,15 +59,6 @@ const Button = styled.button`
     }
 `;
 
-const Link = styled.a`
-    margin: 5px 0px;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: right;
-    text-decoration: none;
-    cursor: pointer;
-`;
-
 const LinkRegister = styled.div`
     margin-top: 10px;
     text-align: center;
@@ -91,39 +75,61 @@ const Hr = styled.hr`
     height: 0.5px;
 `;
 
-const Error = styled.span`
-  color: red;
-`;
-
 const Login = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
     const dispatch = useDispatch();
-    const { isFetching, error } = useSelector((state) => state.user);
 
-    const handleClick = (e) => {
+    const [values, setValues] = useState({
+        username: "",
+        password: "",
+      });
+    
+    const inputs = [
+        {
+          id: 1,
+          name: "email",
+          type: "email",
+          placeholder: "Email",
+          errorMessage: "It should be a valid email address!",
+          label: "Email",
+          required: true,
+        },
+        {
+          id: 2,
+          name: "password",
+          type: "password",
+          placeholder: "Password",
+          errorMessage:
+            "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!",
+          label: "Password",
+          pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+          required: true,
+        },
+    ];
+    
+    const handleSubmit = (e) => {
         e.preventDefault();
-        login(dispatch, { username, password });
+        login(dispatch, values);
     };
+    
+    const onChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
+
 
     return (
         <Container>
             <Wrapper>
                 <Title>Log in</Title>
-                <Form>
-                    <Input
-                        placeholder="Username"
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <Input
-                        placeholder="Password"
-                        type="password"
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    {error && <Error>Something went wrong...</Error>}
-                    <Button onClick={handleClick} disabled={isFetching}>
-                        LOGIN
-                    </Button>
+                <Form onSubmit={handleSubmit}>
+                    {inputs.map((input) => (
+                        <FormInput
+                            key={input.id}
+                            {...input}
+                            value={values[input.name]}
+                            onChange={onChange}
+                        />
+                        ))}
+                        <Button>Login</Button>
                 </Form>
                 <Hr />
                 <LinkRegister>
