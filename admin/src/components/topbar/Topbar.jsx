@@ -13,7 +13,7 @@ export default function Topbar() {
     }
 
     return (
-        <div className="topbar">
+        <div className="top-bar">
             <div className="wrapper">
                 <div className="topLeft">
                     <img src={logo} alt="logo" className="topLeft__logo"></img>

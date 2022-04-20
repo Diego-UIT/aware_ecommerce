@@ -15,7 +15,7 @@ const cartSlice = createSlice({
 
             const duplicate = findItem(state.value, newItem)
 
-            // Trường hợp thêm trùng sản phẩm thì tăng số lượng
+            // In case of adding the same product, increase the quantity
             if (duplicate.length > 0) {
                 state.value = deleteItem(state.value, newItem)
 
@@ -24,7 +24,7 @@ const cartSlice = createSlice({
                     id: duplicate[0].id,
                     quantity: newItem.quantity + duplicate[0].quantity
                 }]
-            // Trường hợp thêm sản phẩm mới
+            // In case of adding a new product
             } else {
                 state.value = [...state.value, {
                     ...newItem,

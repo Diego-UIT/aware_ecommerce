@@ -1,3 +1,5 @@
+@use '../../scss/variables' as *;
+
 .product-list{
     flex: 4;
 
@@ -7,13 +9,13 @@
         justify-content: space-between;
         margin: 15px 20px;
 
-        &__btnAdd {
+        &__btn-add {
             width: 150px;
             border:none;
             padding: 10px 20px;
             font-size: 15px;
-            background-color: #ffa15f;
-            color: #fff;
+            background-color: $main-color;
+            color: $white;
             cursor: pointer;
             font-weight: 400;
             margin-top: 10px;
@@ -42,18 +44,18 @@
         border: none;
         border-radius: 10px;
         padding: 5px 10px;
-        background-color: #ffa15f;
-        color: white;
+        background-color: $main-color;
+        color: $white;
         cursor: pointer;
         margin-right: 20px;
     }
 
     &__delete {
-        color: #3d3d3f;
+        color: $black;
         cursor: pointer;
 
         &:hover {
-            color: red;
+            color: $red;
         }
     }
 }

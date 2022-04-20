@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { Link } from 'react-router-dom'
+import { useLocation } from "react-router";
 
 const Container = styled.div``;
 
@@ -137,7 +138,7 @@ const Cart = () => {
                             <SummaryItemText>Subtotal</SummaryItemText>
                             <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
                         </SummaryItem>
-                        <Button>Check out</Button>
+                        <Link to="/checkout"><Button>Check out</Button></Link>
                     </Summary>
                 </Bottom>
             </Wrapper>

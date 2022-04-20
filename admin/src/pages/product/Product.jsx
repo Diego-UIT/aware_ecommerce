@@ -61,7 +61,7 @@ export default function Product() {
             </div>
             <div className="product-bottom">
                 <form className="product-bottom__form">
-                    <div className="product-bottom__form__formLeft">
+                    <div className="product-bottom__form__form-left">
                         <label>Product Name</label>
                         <input
                             name="title"
@@ -89,7 +89,7 @@ export default function Product() {
                             <option value="false">No</option>
                         </select>
                     </div>
-                    <div className="product-bottom__form__formRight">
+                    <div className="product-bottom__form__form-right">
                         <div className="upload">
                             <img src={product.img} alt="" className="upload__img" />
                             <label for="file">
@@ -97,7 +97,7 @@ export default function Product() {
                             </label>
                             <input type="file" id="file" style={{ display: "none" }} />
                         </div>
-                        <button onClick={handleUpdate} className="btnUpdate">Update</button>
+                        <button onClick={handleUpdate} className="btn-update">Update</button>
                     </div>
                 </form>
             </div>

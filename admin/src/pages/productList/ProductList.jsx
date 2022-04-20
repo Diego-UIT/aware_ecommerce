@@ -69,7 +69,7 @@ export default function ProductList() {
             <div className="product-list__header">
                 <h2 className="product-list__header__title">Products</h2>
                 <Link to="/newproduct">
-                    <button className="product-list__header__btnAdd">Add product</button>
+                    <button className="product-list__header__btn-add">Add product</button>
                 </Link>
             </div>
             <DataGrid

@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);
     } catch (err) {
-        res.status(500).json({success: false, message: 'internal server error'});
+        res.status(500).json(err);
     }
 });
 
@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({success: false, message: 'Wrong username'})
         }
     } catch(err) {
-        res.status(500).json({success: false, message: 'internal server error'});
+        res.status(500).json(err);
     }
 });
 

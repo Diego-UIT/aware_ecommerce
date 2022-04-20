@@ -38,7 +38,6 @@ export default function UserList() {
           headerName: "STATUS",
           width: 150,
           renderCell: (params) => {
-              console.log(params.row.status)
             return (
               <div className="ordersStatus">
                 <Button type={params.row.status} />

@@ -70,6 +70,7 @@ const Button = styled.button`
 const LinkRegister = styled.div`
     margin-top: 5px;
     text-align: center;
+    color: #fff;
 `
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -101,9 +102,11 @@ const Login = () => {
                         LOGIN
                     </Button>
                 </Form>
-                <LinkRegister>
-                    <Link to="/forgotPass">Forgot password</Link>
-                </LinkRegister>
+                <Link to="/forgotPass">
+                    <LinkRegister>
+                        Forgot password
+                    </LinkRegister>
+                </Link>
             </Wrapper>
         </Container>
     );

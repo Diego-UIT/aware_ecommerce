@@ -127,7 +127,7 @@ export default function NewProduct() {
                         <option value="false">No</option>
                     </select>
                 </div>
-                <button onClick={handleClick} className="product-form__btnAdd">
+                <button onClick={handleClick} className="product-form__btn-add">
                     Create
                 </button>
             </form>
