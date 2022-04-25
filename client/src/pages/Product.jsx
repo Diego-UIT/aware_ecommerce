@@ -144,6 +144,7 @@ const Product = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
+    console.log(product)
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState(undefined);
     const [size, setSize] = useState(undefined);
@@ -216,7 +217,7 @@ const Product = () => {
                             <FilterSize onChange={(e) => setSize(e.target.value)}>
                                 <FilterSizeOption disabled>Size</FilterSizeOption>
                                 {product.size?.map((s) => (
-                                <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                                <FilterSizeOption key={s}>{s.value}</FilterSizeOption>
                                 ))}
                             </FilterSize>
                         </Filter>
@@ -224,7 +225,7 @@ const Product = () => {
                             <FilterTitle>Color</FilterTitle>
                             <ColorContainer>
                                 {product.color?.map((c) => (
-                                <FilterColor color={c} key={c} onClick={() => setColor(c)}/>
+                                <FilterColor color={c.value} key={c} onClick={() => setColor(c.value)}/>
                                 ))}
                             </ColorContainer>
                         </Filter>

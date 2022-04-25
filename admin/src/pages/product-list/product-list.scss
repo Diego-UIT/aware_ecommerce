@@ -1,0 +1,92 @@
+@use '../../scss/variables' as *;
+
+.product-list{
+    flex: 4;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $bg-gray1;
+        padding: 15px 20px;
+
+        &__title {
+            font-size: 27px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        &__btn-add {
+            width: 170px;
+            border:none;
+            padding: 12px 18px;
+            font-size: 15px;
+            background-color: $main-color;
+            color: $white;
+            cursor: pointer;
+            font-weight: 400;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            .icon {
+                margin-right: 8px;
+            }
+        }
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        margin-left: 30px;
+
+        &__img {
+            width: 32px;
+            height: 42px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        &__info {
+            p {
+                margin-top: -40px;
+                font-weight: 300;
+            }
+        }
+
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+
+        a {
+            margin-top: 12px;
+        }
+
+        &__edit {
+            color: $black;
+            cursor: pointer;
+    
+            &:hover {
+                color: $main-color;
+            }
+        }
+    
+        &__delete {
+            color: $black;
+            cursor: pointer;
+            margin-left: 10px;
+    
+            &:hover {
+                color: $red;
+            }
+        }
+    }
+}

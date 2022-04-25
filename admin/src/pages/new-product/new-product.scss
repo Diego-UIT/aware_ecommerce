@@ -1,0 +1,83 @@
+@use '../../scss/variables' as *;
+
+.new-product {
+    flex: 4;
+    margin-left: 25px;
+
+    .product-title {
+        font-size: 26px;
+        margin: 30px 0;
+    }
+    
+    .product-form {
+        margin-top: 10px;
+
+        &__item {
+            width: 80%;
+            margin-bottom: 10px;
+
+            &::after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            &__col-25 {
+                float: left;
+                width: 25%;
+                margin-top: 6px;
+
+                & > label {
+                    color: $dark-gray;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                    font-size: 14px;
+                    display: inline-block;
+                    padding: 12px 12px 12px 0;
+                }
+            }
+
+            &__col-75 {
+                float: left;
+                width: 75%;
+                margin-top: 6px;
+
+                & > input {
+                    width: 96.5%;
+                    padding: 12px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
+                  
+                & > select {
+                    padding: 10px;
+                }
+            }  
+
+            &__btn-cancel {
+                margin-top: 10px;
+                padding: 15px 25px;
+                border: none;
+                width: 21%;
+                background-color: $bg-gray1;
+                color: $main-color;
+                font-weight: 600;
+                cursor: pointer;
+                float: right;
+            }
+
+            &__btn-add {
+                margin-top: 10px;
+                padding: 15px 25px;
+                border: none;
+                width: 21%;
+                margin-left: 15px;
+                background-color: $main-color;
+                color: $white;
+                font-weight: 600;
+                cursor: pointer;
+                float: right;
+            }
+        }
+    }
+}

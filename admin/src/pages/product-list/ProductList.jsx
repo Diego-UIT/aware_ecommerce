@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/callAPI";
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import EditIcon from '@mui/icons-material/Edit';
 import moment from 'moment'
 
-export default function ProductList() {
+const ProductList = () => {
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
 
@@ -25,24 +27,28 @@ export default function ProductList() {
           field: "product",
           headerName: "PRODUCTS",
           width: 400,
+          headerAlign: 'center',
           renderCell: (params) => {
             return (
               <div className="product-list__item">
                 <img className="product-list__item__img" src={params.row.img} alt="" />
-                {params.row.title}
+                <div className="product-list__item__info">
+                    {params.row.title}
+                    <p>{params.row.categories[0]}</p>
+                </div>
               </div>
             );
           },
         },
+        { field: "inStock", headerName: "STOCK", width: 150 },
         {
-            field: 'createdAt', headerName: 'Create at', width: 170,
-            renderCell: (params) => moment(params.value).format('DD-MM-YYYY HH:mm:ss')
+            field: 'createdAt', headerName: 'DATE ADDED', width: 200,
+            renderCell: (params) => moment(params.value).format('MMMM Do YYYY')
         },
-        { field: "inStock", headerName: "STOCK", width: 200 },
         {
           field: "price",
-          headerName: "PRICE",
-          width: 150,
+          headerName: "PROFIT ($)",
+          width: 200,
         },
         {
           field: "action",
@@ -50,15 +56,15 @@ export default function ProductList() {
           width: 150,
           renderCell: (params) => {
             return (
-              <>
+              <div className="product-list__action">
                 <Link to={"/product/" + params.row._id}>
-                  <button className="product-list__edit">Edit</button>
+                    <EditIcon className="product-list__action__edit"/>
                 </Link>
                 <DeleteOutline
-                  className="product-list__delete"
-                  onClick={() => handleDelete(params.row._id)}
-                />
-              </>
+                    className="product-list__action__delete"
+                    onClick={() => handleDelete(params.row._id)}
+                /> 
+              </div>
             );
           },
         },
@@ -67,19 +73,25 @@ export default function ProductList() {
     return (
         <div className="product-list">
             <div className="product-list__header">
-                <h2 className="product-list__header__title">Products</h2>
+                <h1 className="product-list__header__title">Products</h1>
                 <Link to="/newproduct">
-                    <button className="product-list__header__btn-add">Add product</button>
+                    <button className="product-list__header__btn-add">
+                        <AddOutlinedIcon className="icon"/>
+                        Add product
+                    </button>
                 </Link>
             </div>
             <DataGrid
+                autoHeight
                 rows={products}
                 disableSelectionOnClick
                 columns={columns}
                 getRowId={(row) => row._id}
                 pageSize={8}
-                checkboxSelection
+                density='comfortable'
             />
         </div>
     );
 }
+
+export default ProductList

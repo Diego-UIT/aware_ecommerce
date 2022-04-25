@@ -4,7 +4,7 @@ import { userRequest } from "../../requestMethods";
 import { useState, useEffect } from "react";
 import moment from 'moment'
 
-export default function UserList() {
+const Orders = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
@@ -18,28 +18,41 @@ export default function UserList() {
     }, []);
 
     const Button = ({ type }) => {
-        return <button className={"ordersStatus__btn " + type}>{type}</button>;
+        return <button className={"order-status__btn " + type}>{type}</button>;
       };
 
     const columns = [
-        { field: "_id", headerName: "ORDER ID", width: 250 },
         {
-            field: 'createdAt', headerName: 'ORDERED DATE', width: 200,
-            renderCell: (params) => moment(params.value).format('DD-MM-YYYY HH:mm:ss')
+            field: "_id", headerName: "ORDER ID", width: 270, headerAlign: 'center',
+            renderCell: (params) => <span className="order-id">{params.value}</span>
+        
         },
-        { field: "userId", headerName: "CUSTOMER", width: 250 },
+        {
+            field: 'createdAt', headerName: 'ORDERED DATE', width: 200, headerAlign: 'center',
+            renderCell: (params) => moment(params.value).format('MMMM Do YYYY')
+        },
+        { 
+            field: "products", headerName: "DETAIL", width: 300, headerAlign: 'center',
+            renderCell: (params) => {
+                return (
+                    params.value[0].title
+                )
+            }
+        },
         {
           field: "amount",
           headerName: "TOTAL ($)",
           width: 150,
+          headerAlign: 'center',
         },
         {
           field: "status",
           headerName: "STATUS",
           width: 150,
+          headerAlign: 'center',
           renderCell: (params) => {
             return (
-              <div className="ordersStatus">
+              <div className="order-status">
                 <Button type={params.row.status} />
               </div>
             );
@@ -49,14 +62,20 @@ export default function UserList() {
 
     return (
         <div className="orders">
-        <DataGrid
-            rows={orders}
-            disableSelectionOnClick
-            columns={columns}
-            getRowId={(row) => row._id}
-            pageSize={8}
-            checkboxSelection
-        />
+            <div className="orders__header">
+                <h1 className="orders__header__title">Orders</h1>
+            </div>
+            <DataGrid
+                autoHeight
+                rows={orders}
+                disableSelectionOnClick
+                columns={columns}
+                getRowId={(row) => row._id}
+                pageSize={8}
+                density='comfortable'
+            />
         </div>
     );
 }
+
+export default Orders

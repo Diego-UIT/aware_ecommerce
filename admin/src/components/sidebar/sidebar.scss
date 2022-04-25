@@ -3,12 +3,12 @@
 .sidebar {
     flex: 1;
     height: calc(100vh - 50px);
-    background-color: $bg-white;
+    background-color: $bg-gray1;
     position: sticky;
     top: 50px;
+    border-right: 2px solid $border;
 
     .wrapper {
-        padding: 20px;
         color: $gray;
     
         .sidebar-menu {

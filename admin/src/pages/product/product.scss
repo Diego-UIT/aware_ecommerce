@@ -4,6 +4,12 @@
     flex: 4;
     padding: 20px;
 
+    .title-container {
+        &__title {
+            font-size: 25px;
+        }
+    }
+
     .product-bottom {
         padding: 20px;
         margin: 20px;

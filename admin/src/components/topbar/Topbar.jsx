@@ -1,6 +1,6 @@
 import React from "react";
 import "./topbar.scss";
-import { NotificationsNone } from "@material-ui/icons";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import logo from "../../assets/images/logo@2x.png"
 import { useNavigate } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ export default function Topbar() {
     }
 
     return (
-        <div className="top-bar">
+        <div className="topbar">
             <div className="wrapper">
                 <div className="topLeft">
                     <img src={logo} alt="logo" className="topLeft__logo"></img>
@@ -24,7 +24,7 @@ export default function Topbar() {
                         onClick={() => handleLogout(navigate)}
                         className="topRight__logout">Log out</button>
                     <div className="topRight__icon">
-                        <NotificationsNone />
+                        <NotificationsIcon />
                         <span className="topRight__icon__iconBadge">2</span>
                     </div>
                 </div>

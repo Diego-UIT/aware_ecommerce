@@ -8,6 +8,9 @@ const OrderSchema = new mongoose.Schema(
         productId: {
           type: String,
         },
+        title: {
+          type: String,
+        },
         quantity: {
           type: Number,
           default: 1,
@@ -16,7 +19,7 @@ const OrderSchema = new mongoose.Schema(
     ],
     amount: { type: Number, required: true },
     address: { type: Object, required: true },
-    status: { type: String, default: "pending" },
+    status: { type: String, default: "Pending" },
   },
   { timestamps: true }
 );
