@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { Link } from 'react-router-dom'
-import { useLocation } from "react-router";
+import CurrencyFormat from 'react-currency-format';
 
 const Container = styled.div``;
 
@@ -131,12 +131,16 @@ const Cart = () => {
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryItemText>Total product:</SummaryItemText>
-                            <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
+                            <SummaryItemPrice>
+                                <CurrencyFormat value={totalPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                            </SummaryItemPrice>
                         </SummaryItem>
                         <Divider />
                         <SummaryItem type="total">
                             <SummaryItemText>Subtotal</SummaryItemText>
-                            <SummaryItemPrice>$ {totalPrice}</SummaryItemPrice>
+                            <SummaryItemPrice>                    
+                                <CurrencyFormat value={totalPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                            </SummaryItemPrice>
                         </SummaryItem>
                         <Link to="/checkout"><Button>Check out</Button></Link>
                     </Summary>

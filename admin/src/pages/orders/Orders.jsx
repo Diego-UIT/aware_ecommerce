@@ -3,6 +3,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import { userRequest } from "../../requestMethods";
 import { useState, useEffect } from "react";
 import moment from 'moment'
+import CurrencyFormat from 'react-currency-format';
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
@@ -44,6 +45,7 @@ const Orders = () => {
           headerName: "TOTAL ($)",
           width: 150,
           headerAlign: 'center',
+          renderCell: (params) => <CurrencyFormat value={params.value} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         },
         {
           field: "status",

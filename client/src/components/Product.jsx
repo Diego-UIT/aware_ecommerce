@@ -1,77 +1,96 @@
-import {
-    FavoriteBorderOutlined,
-    SearchOutlined,
-    ShoppingCartOutlined,
-  } from "@material-ui/icons";
-  import { Link } from "react-router-dom";
-  import styled from "styled-components";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import CurrencyFormat from 'react-currency-format';
+
+const ButtonContainer = styled.div`
+    position: absolute;
+    top: 256px;
+    left: 0;
+    display: none;
+`
+
+const Container = styled.div`
+    text-align: left;
+    margin-bottom: 20px;
+    position: relative;
+
+    & a {
+        text-decoration: none;
+    }
+
+    &:hover ${ButtonContainer} {
+        display: block;
+    }
+`;
+
+const ImageContainer = styled.div`
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+`
   
-  const Info = styled.div`
-    opacity: 0;
-    width: 100%;
-    height: 100%;
+const Image = styled.img`
     position: absolute;
     top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.5s ease;
+    left: 34%;
+    max-width: 67%;
+    height: 100%;
+    transform: translateX(-50%);
+`;
+
+const Title = styled.h3`
+    margin-bottom: 10px;
+    color: #202124;
+    font-size: 16px;
+    font-weight: 500;
+    max-width: 70%;
+`
+const Price = styled.div`
+    margin-bottom: 10px;
+    color: #4d4d4d;
+    font-size: 15px;
+    font-weight: 300;
+`
+
+const Button = styled.button`
+    border: none;
+    padding: 16px 65px;
+    background-color: #ffa15f;
+    color: #fff;
     cursor: pointer;
-  `;
-  
-  const Container = styled.div`
-    flex: 1;
-    margin: 5px;
-    min-width: 280px;
-    height: 350px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f5fbfd;
-    position: relative;
-    &:hover ${Info}{
-      opacity: 1;
-    }
-  `;
-  
-  const Image = styled.img`
-    height: 80%;
-    border-radius: 50%;
-    z-index: 2;
-  `;
-  
-  const Icon = styled.div`
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    transition: all 0.5s ease;
-    &:hover {
-      background-color: #e9f5f5;
-      transform: scale(1.1);
-    }
-  `;
-  
-  const Product = ({ item }) => {
+    font-weight: 400;
+`
+
+const SoldOut = styled.div`
+    padding: 5px 10px;
+    background-color: #808080;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    position: absolute;
+    top: 240px;
+    left: -5px;
+`
+
+const Product = ({ item }) => {
     return (
-      <Container>
-        <Image src={item.img} />
-        <Info>
-          <Icon>
-            <Link to={`/product/${item._id}`}>
-                <SearchOutlined />
-            </Link>
-          </Icon>
-        </Info>
-      </Container>
+        <Container>
+                <Link to={`/product/${item._id}`}>
+                    <ImageContainer>
+                        <Image src={item.img} />
+                            <ButtonContainer>
+                                <Button>Quick shop</Button>
+                            </ButtonContainer>
+                    </ImageContainer>
+                    <Title>{item.title}</Title>
+                </Link>
+                {item.inStock ? '' : <SoldOut>Sold out</SoldOut>}
+                <Price>
+                    <CurrencyFormat value={item.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+                </Price>
+        </Container>
     );
-  };
+};
   
-  export default Product;
+export default Product;

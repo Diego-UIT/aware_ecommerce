@@ -8,6 +8,7 @@ import { deleteProduct, getProducts } from "../../redux/callAPI";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import moment from 'moment'
+import CurrencyFormat from 'react-currency-format';
 
 const ProductList = () => {
     const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const ProductList = () => {
           field: "price",
           headerName: "PROFIT ($)",
           width: 200,
+          renderCell: (params) => <CurrencyFormat value={params.value} displayType={'text'} thousandSeparator={true} prefix={'$'} />
         },
         {
           field: "action",

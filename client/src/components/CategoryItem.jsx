@@ -3,23 +3,21 @@ import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 
 const Container = styled.div`
-  flex: 1;
-  margin: 3px;
-  height: 70vh;
-  position: relative;
+    flex: 1;
+    margin: 10px;
+    position: relative;
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  ${mobile({ height: "20vh" })}
-
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    ${mobile({ height: "20vh" })}
 `;
 
 const Info = styled.div`
     position: absolute;
-    top: 100px;
+    top: 150px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -31,23 +29,24 @@ const Info = styled.div`
 
 const Title = styled.h2`
     color: white;
-    font-weight: normal;
+    font-weight: 500;
     margin-bottom: 10px;
+    font-family: 'Domine', serif;
 `;
 
 const Button = styled.button`
-    border:none;
+    border: none;
     padding: 15px 25px;
     background-color: #ffa15f;
     color: #fff;
     cursor: pointer;
-    font-weight: 400;
+    font-weight: 600;
     margin-top: 10px;
 `;
 
 const Divider = styled.div`
-    height: 0.5px;
-    width: 80%;
+    height: 2px;
+    width: 70%;
     background: #eaeaea;
 `
 
@@ -59,7 +58,7 @@ const CategoryItem = ({ item }) => {
                 <Info>
                     <Title>{item.title}</Title>
                     <Divider></Divider>
-                    <Button>SHOP NOW</Button>
+                    <Button>Shop now</Button>
                 </Info>
             </Link>
         </Container>

@@ -1,15 +1,15 @@
 import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+import { Search, ShoppingCart, ArrowDropDown } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import logo from "../assets/images/logo.png"
+import logo from "../assets/images/logo@2x.png"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Container = styled.div`
-  height: 60px;
-  ${mobile({ height: "50px" })}
+    height: 130px;
+    ${mobile({ height: "50px" })}
 `;
 
 const Wrapper = styled.div`
@@ -20,6 +20,15 @@ const Wrapper = styled.div`
   ${mobile({ padding: "10px 0px" })}
 `;
 
+const WrapperBottom = styled.div`
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #ececec;
+    border-bottom: 1px solid #ececec;
+`
+
 const Left = styled.div`
   flex: 1;
   display: flex;
@@ -27,17 +36,18 @@ const Left = styled.div`
 `;
 
 const SearchContainer = styled.div`
-  border: 0.5px solid lightgray;
+  border: 2px solid #cccccc;
   border-radius: 100px;
   display: flex;
   align-items: center;
-  margin-left: 25px;
-  padding: 10px 15px;
+  margin-left: 20px;
+  padding: 7px 12px;
 `;
 
 const Input = styled.input`
   border: none;
   outline: none;
+  color: #cccccc;
   ${mobile({ width: "50px" })}
 `;
 
@@ -46,13 +56,17 @@ const Center = styled.div`
   text-align: center;
 `;
 
-const Logo = styled.img``;
+const Logo = styled.img`
+    width: 25%;
+    height: 25%;
+`;
 
 const Right = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-right: 20px;
   ${mobile({ flex: 2, justifyContent: "center" })}
 `;
 
@@ -73,8 +87,8 @@ const ButtonLogin = styled.button`
     padding: 10px 35px;
     background-color: #fff;
     color: #ffa15f;
+    font-weight: bold;
     cursor: pointer;
-    font-weight: 500;
     transition: color .3s ease;
     &:hover {
         background-color: #ffa15f;
@@ -102,6 +116,20 @@ const DisplayUser = styled.p`
         text-decoration: none;
     }
 `
+const List = styled.ul`
+    list-style: none;
+    display: flex;
+    justify-content: center;
+`;
+
+const ListItem = styled.li`
+    color: #202124;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+`;
 
 const Navbar = () => {
     const cart = useSelector(state=>state.cart.value)
@@ -113,7 +141,7 @@ const Navbar = () => {
                 <Left>
                 <SearchContainer>
                     <Input placeholder="Search" />
-                    <Search style={{ color: "gray", fontSize: 20 }} />
+                    <Search style={{ color: "gray", fontSize: 25 }} />
                 </SearchContainer>
                 </Left>
                 <Center>
@@ -142,12 +170,22 @@ const Navbar = () => {
                     <Link to="/cart">
                         <MenuItem>
                             <Badge badgeContent={cart.length} color="secondary">
-                            <ShoppingCartOutlined />
+                            <ShoppingCart />
                             </Badge>
                         </MenuItem>
                     </Link>
                 </Right>
             </Wrapper>
+            <WrapperBottom>
+                <Center>
+                    <List>
+                        <ListItem>Men <ArrowDropDown/></ListItem>
+                        <ListItem>Ladies <ArrowDropDown/></ListItem>
+                        <ListItem>Girls <ArrowDropDown/></ListItem>
+                        <ListItem>Boys <ArrowDropDown/></ListItem>
+                    </List>
+                </Center>
+            </WrapperBottom>
         </Container>
     );
 };

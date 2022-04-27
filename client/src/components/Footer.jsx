@@ -5,7 +5,7 @@ import {
 } from "@material-ui/icons";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import logo from "../assets/images/logo.png"
+import logo from "../assets/images/logo@2x.png"
 
 const Container = styled.div`
     height: 50px;
@@ -13,11 +13,20 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-    padding: 20px 50px;
+    padding: 60px 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-top: 1px solid #ececec;
     ${mobile({ padding: "10px 0px" })}
+`;
+
+const WrapperBottom = styled.div`
+    padding: 30px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #ececec;
 `;
 
 const Left = styled.div`
@@ -35,15 +44,19 @@ const SocialContainer = styled.div`
 `;
 
 const SocialIcon = styled.div`
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     color: white;
-    background-color: #b7b7b7;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 20px;
+
+    & svg {
+        font-size: 22px;
+        color: #b7b7b7;
+    }
 `;
 
 const Center = styled.div`
@@ -62,7 +75,19 @@ const List = styled.ul`
 
 const ListItem = styled.li`
     color: #b7b7b7;
+    font-size: 15px;
+    margin-left: 50px;
 `;
+
+const ListBottomItem = styled.li`
+    color: #b7b7b7;
+    font-size: 13px;
+    margin-left: 20px;
+
+    &:nth-child(1) {
+        margin-left: 0;
+    }
+`
 
 const Right = styled.div`
     flex: 1;
@@ -80,28 +105,46 @@ const Footer = () => {
             </Left>
             <Center>
                 <List>
-                <ListItem>Home</ListItem>
-                <ListItem>Products</ListItem>
-                <ListItem>Services</ListItem>
-                <ListItem>About us</ListItem>
-                <ListItem>Help</ListItem>
-                <ListItem>Contacts</ListItem>
+                    <ListItem>Home</ListItem>
+                    <ListItem>Products</ListItem>
+                    <ListItem>Services</ListItem>
+                    <ListItem>About</ListItem>
+                    <ListItem>Help</ListItem>
+                    <ListItem>Contacts</ListItem>
                 </List>
             </Center>
             <Right>
                 <SocialContainer>
-                <SocialIcon>
-                    <Facebook />
-                </SocialIcon>
-                <SocialIcon>
-                    <Instagram />
-                </SocialIcon>
-                <SocialIcon>
-                    <Twitter />
-                </SocialIcon>
+                    <SocialIcon>
+                        <Twitter />
+                    </SocialIcon>
+                    <SocialIcon>
+                        <Facebook />
+                    </SocialIcon>
+                    <SocialIcon>
+                        <Instagram />
+                    </SocialIcon>
                 </SocialContainer>
             </Right>
         </Wrapper>
+        <WrapperBottom>
+            <Left>
+                <List>
+                    <ListBottomItem>Home</ListBottomItem>
+                    <ListBottomItem>Products</ListBottomItem>
+                    <ListBottomItem>Services</ListBottomItem>
+                    <ListBottomItem>About</ListBottomItem>
+                    <ListBottomItem>Help</ListBottomItem>
+                    <ListBottomItem>Contacts</ListBottomItem>
+                </List>
+            </Left>
+            <Right>
+                <List>
+                    <ListBottomItem>Privacy Policy</ListBottomItem>
+                    <ListBottomItem>Terms & Conditions</ListBottomItem>
+                </List>
+            </Right>
+        </WrapperBottom>
     </Container>
   );
 };

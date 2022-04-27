@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { updateItem, removeItem } from '../redux/cartReducer'
 import styled from "styled-components";
 import { Add, Remove } from "@material-ui/icons";
+import CurrencyFormat from 'react-currency-format';
 
 const Product = styled.div`
     display: flex;
@@ -146,7 +147,7 @@ const CartItem = props => {
                     <Add onClick={() => updateQuantity('+')}/>
                 </ProductAmountContainer>
                 <ProductPrice>
-                    $ {item.price * item.quantity}
+                    <CurrencyFormat value={item.price * item.quantity} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                 </ProductPrice>
             </PriceDetail>
         </Product>
