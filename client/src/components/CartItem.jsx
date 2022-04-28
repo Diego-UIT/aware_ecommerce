@@ -8,8 +8,8 @@ import CurrencyFormat from 'react-currency-format';
 const Product = styled.div`
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #eee;
-    margin-bottom: 20px;
+    border-top: 1px solid rgb(187, 187, 187);
+    padding: 20px 0;
 `;
 
 const ProductDetail = styled.div`
@@ -19,21 +19,27 @@ const ProductDetail = styled.div`
 `;
 
 const Image = styled.img`
-    width: 200px;
+    width: 100px;
+    max-width: 100%;
+    margin-right: 25px;
 `;
 
 const Details = styled.div`
-    padding: 20px;
     display: flex;
     flex-grow: 1;
-    justify-content: space-between;
+    justify-content: flex-start;
 `;
 
 const ProductName = styled.h2`
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
-    
 `;
+
+const ColorContainer = styled.div`
+    width: 22%;
+    margin-left: 55px;
+    margin-top: 50px;
+`
 
 const ProductColor = styled.div`
     width: 30px;
@@ -42,16 +48,14 @@ const ProductColor = styled.div`
     background-color: ${(props) => props.color};
 `;
 
+const SizeContainer = styled.div`
+    margin-top: 50px;   
+    margin-left: 15px;
+`
+
 const ProductSize = styled.span`
     font-size: 18px;
-`;
-
-const PriceDetail = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    flex: 1;
+    font-weight: 500;
 `;
 
 const ProductAmountContainer = styled.div`
@@ -60,29 +64,34 @@ const ProductAmountContainer = styled.div`
     justify-content: center;
     font-weight: 400;
     border: 2px solid #d4d3d3;
-    padding: 8px;
+    padding: 6px;
+    width: 130px;
+    max-width: 100%;
+    margin-right: 50px;
 `;
 
 const ProductAmount = styled.div`
-    font-size: 22px;
-    width: 80px;
-    height: 40px;
+    font-size: 20px;
+    width: 73px;
+    height: 37px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0px 5px;
+    margin: 0;
 `;
 
 const ProductPrice = styled.div`
-    font-size: 25px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 500;
     margin-top: 10px;
+    width: 10%;
 `;
 
 const RemoteItemCart = styled.div`
     margin-top: 30px;
     & span {
         cursor: pointer;
+        font-size: 14px;
     }
 
     & span:hover {
@@ -93,7 +102,8 @@ const RemoteItemCart = styled.div`
 const NameContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 35%;
+    margin-top: 30px;
+    width: 30%;
 `
 
 const CartItem = props => {
@@ -124,23 +134,21 @@ const CartItem = props => {
     return (
         <Product>
             <ProductDetail>
-                <Image src={item.img} />
                 <Details>
+                    <Image src={item.img} />
                     <NameContainer>
-                        <ProductName>
-                            {item.title}
-                        </ProductName>
+                        <ProductName>{item.title}</ProductName>
                         <RemoteItemCart>
                             <span onClick={() => removeCartItem()}>Remove</span>
                         </RemoteItemCart>
                     </NameContainer>
-                    <ProductColor color={item.color} />
-                    <ProductSize>
-                        <b>Size:</b> {item.size}
-                    </ProductSize>
+                    <ColorContainer>
+                        <ProductColor color={item.color} />
+                    </ColorContainer>
+                    <SizeContainer>
+                        <ProductSize>{item.size}</ProductSize>
+                    </SizeContainer>
                 </Details>
-            </ProductDetail>
-            <PriceDetail>
                 <ProductAmountContainer>
                     <Remove onClick={() => updateQuantity('-')}/>
                     <ProductAmount>{item.quantity}</ProductAmount>
@@ -149,7 +157,7 @@ const CartItem = props => {
                 <ProductPrice>
                     <CurrencyFormat value={item.price * item.quantity} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                 </ProductPrice>
-            </PriceDetail>
+            </ProductDetail>
         </Product>
     )
 }

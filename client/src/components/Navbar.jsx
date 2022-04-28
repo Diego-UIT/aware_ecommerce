@@ -6,6 +6,7 @@ import { mobile } from "../responsive";
 import logo from "../assets/images/logo@2x.png"
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { categories } from "../data";
 
 const Container = styled.div`
     height: 130px;
@@ -120,6 +121,10 @@ const List = styled.ul`
     list-style: none;
     display: flex;
     justify-content: center;
+
+    & a {
+        text-decoration: none;
+    }
 `;
 
 const ListItem = styled.li`
@@ -179,10 +184,11 @@ const Navbar = () => {
             <WrapperBottom>
                 <Center>
                     <List>
-                        <ListItem>Men <ArrowDropDown/></ListItem>
-                        <ListItem>Ladies <ArrowDropDown/></ListItem>
-                        <ListItem>Girls <ArrowDropDown/></ListItem>
-                        <ListItem>Boys <ArrowDropDown/></ListItem>
+                        {categories.map((item) => (
+                            <Link to={`/products/${item.cat}`}>
+                                <ListItem key={item.id}>{item.title} <ArrowDropDown/></ListItem>
+                            </Link>
+                        ))} 
                     </List>
                 </Center>
             </WrapperBottom>

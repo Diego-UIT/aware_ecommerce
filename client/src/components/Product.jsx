@@ -69,7 +69,7 @@ const SoldOut = styled.div`
     font-size: 14px;
     font-weight: 500;
     position: absolute;
-    top: 240px;
+    top: 200px;
     left: -5px;
 `
 
